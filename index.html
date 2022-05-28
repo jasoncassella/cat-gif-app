@@ -32,9 +32,7 @@
 						img.src = response.data.images.original.url;
 					})
 					.catch(function (response) {
-						let errorMessage = document.createElement('h1');
-						errorMessage.textContent = `there were no gifs of ${searchTerm} `;
-						document.body.appendChild(errorMessage);
+						alert(`there were no gifs of ${searchTerm}`);
 					});
 			}
 		</script>
