@@ -7,21 +7,36 @@
 		<title>Giphy API App</title>
 	</head>
 	<body>
+		<input type="text" />
+		<button>display gif</button>
 		<img src="#" alt="" />
 		<script>
 			const img = document.querySelector('img');
-			fetch(
-				'https://api.giphy.com/v1/gifs/translate?api_key=0804rL4eo40Vb9eRvq1EDWJZ3S0sfahL&s=cats',
-				{
-					mode: 'cors',
-				}
-			)
-				.then(function (response) {
-					return response.json();
-				})
-				.then(function (response) {
-					img.src = response.data.images.original.url;
-				});
+			const button = document.querySelector('button');
+			const input = document.querySelector('input');
+
+			button.addEventListener('click', runFetch);
+
+			function runFetch() {
+				const searchTerm = input.value;
+				fetch(
+					`https://api.giphy.com/v1/gifs/translate?api_key=0804rL4eo40Vb9eRvq1EDWJZ3S0sfahL&s=${searchTerm}`,
+					{
+						mode: 'cors',
+					}
+				)
+					.then(function (response) {
+						return response.json();
+					})
+					.then(function (response) {
+						img.src = response.data.images.original.url;
+					})
+					.catch(function (response) {
+						let errorMessage = document.createElement('h1');
+						errorMessage.textContent = `there were no gifs of ${searchTerm} `;
+						document.body.appendChild(errorMessage);
+					});
+			}
 		</script>
 	</body>
 </html>
