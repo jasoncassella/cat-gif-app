@@ -25,13 +25,13 @@
 						mode: 'cors',
 					}
 				)
-					.then(function (response) {
+					.then(response => {
 						return response.json();
 					})
-					.then(function (response) {
+					.then(response => {
 						img.src = response.data.images.original.url;
 					})
-					.catch(function (response) {
+					.catch(response => {
 						alert(`there were no gifs of ${searchTerm}`);
 					});
 			}
